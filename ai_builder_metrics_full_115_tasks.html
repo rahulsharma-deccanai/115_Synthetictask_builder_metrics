@@ -1,0 +1,348 @@
+
+<style>
+  .dash{padding:1rem 0;font-family:var(--font-sans)}
+  .sec{font-size:12px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.06em;text-transform:uppercase;margin:1.5rem 0 .75rem}
+  .mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+  .mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.85rem 1rem}
+  .ml{font-size:12px;color:var(--color-text-secondary);margin:0 0 3px}
+  .mv{font-size:21px;font-weight:500;color:var(--color-text-primary);margin:0}
+  .ms{font-size:11px;color:var(--color-text-tertiary);margin:2px 0 0}
+  .cc{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:12px}
+  .cr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .ct{font-size:13px;font-weight:500;color:var(--color-text-primary);margin:0 0 8px}
+  .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-size:12px;color:var(--color-text-secondary)}
+  .li{display:flex;align-items:center;gap:5px}
+  .ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+</style>
+
+<div class="dash">
+  <h2 class="sr-only">Builder metrics dashboard — all 115 tasks, April 29 2026</h2>
+
+  <p class="sec">Overview — 115 tasks</p>
+  <div class="mg">
+    <div class="mc"><p class="ml">Total tasks</p><p class="mv">115</p><p class="ms">Apr 29, 2026</p></div>
+    <div class="mc"><p class="ml">Pass rate</p><p class="mv" style="color:#1D9E75">86.96%</p><p class="ms">100 passed</p></div>
+    <div class="mc"><p class="ml">Verify fail</p><p class="mv" style="color:#BA7517">8.70%</p><p class="ms">10 tasks</p></div>
+    <div class="mc"><p class="ml">Error rate</p><p class="mv" style="color:#E24B4A">4.35%</p><p class="ms">5 tasks</p></div>
+    <div class="mc"><p class="ml">Total cost</p><p class="mv">$243.07</p><p class="ms">USD</p></div>
+    <div class="mc"><p class="ml">Avg cost</p><p class="mv">$2.11</p><p class="ms">per task</p></div>
+    <div class="mc"><p class="ml">Avg duration</p><p class="mv">493s</p><p class="ms">per task</p></div>
+    <div class="mc"><p class="ml">Max duration</p><p class="mv">1176s</p><p class="ms">axiomlog task</p></div>
+    <div class="mc"><p class="ml">Input tokens</p><p class="mv">2.19M</p><p class="ms">total</p></div>
+    <div class="mc"><p class="ml">Output tokens</p><p class="mv">3.60M</p><p class="ms">total</p></div>
+    <div class="mc"><p class="ml">Thinking tokens</p><p class="mv">40.6K</p><p class="ms">total</p></div>
+    <div class="mc"><p class="ml">Avg repair calls</p><p class="mv">0.86</p><p class="ms">per task</p></div>
+  </div>
+
+  <p class="sec">Status breakdown by domain</p>
+  <div class="cc">
+    <div class="leg">
+      <span class="li"><span class="ld" style="background:#1D9E75"></span>Pass</span>
+      <span class="li"><span class="ld" style="background:#BA7517"></span>Verify fail</span>
+      <span class="li"><span class="ld" style="background:#E24B4A"></span>Error</span>
+    </div>
+    <div style="position:relative;width:100%;height:300px">
+      <canvas id="c1" role="img" aria-label="Stacked bar chart of task outcomes per domain"></canvas>
+    </div>
+  </div>
+
+  <div class="cr">
+    <div class="cc">
+      <p class="ct">Tasks by language</p>
+      <div class="leg">
+        <span class="li"><span class="ld" style="background:#1D9E75"></span>Pass</span>
+        <span class="li"><span class="ld" style="background:#BA7517"></span>Verify fail</span>
+        <span class="li"><span class="ld" style="background:#E24B4A"></span>Error</span>
+      </div>
+      <div style="position:relative;width:100%;height:210px">
+        <canvas id="c2" role="img" aria-label="Stacked bar chart by language"></canvas>
+      </div>
+    </div>
+    <div class="cc">
+      <p class="ct">Repair calls distribution</p>
+      <div style="position:relative;width:100%;height:240px">
+        <canvas id="c3" role="img" aria-label="Doughnut chart of repair call counts">0 calls: 50; 1 call: 43; 2 calls: 19; 3 calls: 3.</canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="cr">
+    <div class="cc">
+      <p class="ct">Avg cost per domain (USD)</p>
+      <div style="position:relative;width:100%;height:280px">
+        <canvas id="c4" role="img" aria-label="Horizontal bar chart of average cost by domain"></canvas>
+      </div>
+    </div>
+    <div class="cc">
+      <p class="ct">Avg duration by domain (s)</p>
+      <div style="position:relative;width:100%;height:280px">
+        <canvas id="c5" role="img" aria-label="Horizontal bar chart of average duration by domain"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="cr">
+    <div class="cc">
+      <p class="ct">Avg cost by language (USD)</p>
+      <div style="position:relative;width:100%;height:190px">
+        <canvas id="c6" role="img" aria-label="Bar chart of average cost by language"></canvas>
+      </div>
+    </div>
+    <div class="cc">
+      <p class="ct">Avg duration by language (s)</p>
+      <div style="position:relative;width:100%;height:190px">
+        <canvas id="c7" role="img" aria-label="Bar chart of average duration by language"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec">Cumulative cost over time (all 115 tasks in order)</p>
+  <div class="cc">
+    <div style="position:relative;width:100%;height:200px">
+      <canvas id="c8" role="img" aria-label="Line chart showing cumulative cost as tasks complete"></canvas>
+    </div>
+  </div>
+
+  <p class="sec">Verify fail & error tasks — detail</p>
+  <div class="cc" style="padding:.75rem 1.25rem;overflow-x:auto">
+    <table style="width:100%;font-size:12px;border-collapse:collapse" id="failTable" aria-label="Failed and errored tasks">
+      <thead>
+        <tr style="border-bottom:.5px solid var(--color-border-tertiary)">
+          <th style="text-align:left;padding:6px 4px 6px 0;font-weight:500;color:var(--color-text-secondary)">Task</th>
+          <th style="text-align:left;font-weight:500;color:var(--color-text-secondary)">Domain</th>
+          <th style="text-align:left;font-weight:500;color:var(--color-text-secondary)">Lang</th>
+          <th style="text-align:right;font-weight:500;color:var(--color-text-secondary)">Cost</th>
+          <th style="text-align:right;font-weight:500;color:var(--color-text-secondary)">Duration</th>
+          <th style="text-align:right;font-weight:500;color:var(--color-text-secondary)">Repairs</th>
+          <th style="text-align:right;font-weight:500;color:var(--color-text-secondary)">Status</th>
+        </tr>
+      </thead>
+      <tbody id="ftbody"></tbody>
+    </table>
+  </div>
+
+  <p class="sec">Top 5 costliest tasks</p>
+  <div class="cc" style="padding:.75rem 1.25rem;overflow-x:auto">
+    <table style="width:100%;font-size:12px;border-collapse:collapse" aria-label="Top 5 most expensive tasks">
+      <thead>
+        <tr style="border-bottom:.5px solid var(--color-border-tertiary)">
+          <th style="text-align:left;padding:6px 4px 6px 0;font-weight:500;color:var(--color-text-secondary)">Task</th>
+          <th style="text-align:left;font-weight:500;color:var(--color-text-secondary)">Domain</th>
+          <th style="text-align:left;font-weight:500;color:var(--color-text-secondary)">Lang</th>
+          <th style="text-align:right;font-weight:500;color:var(--color-text-secondary)">Cost</th>
+          <th style="text-align:right;font-weight:500;color:var(--color-text-secondary)">Status</th>
+        </tr>
+      </thead>
+      <tbody id="ttbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const D=[
+  {n:"voltstream-prebuild-esm-mismatch",d:"dependency_management",l:"javascript",s:"error",c:2.247727,dur:414.847,r:1},
+  {n:"chronoflux-window-param-extension",d:"feature_development",l:"java",s:"pass",c:2.332197,dur:428.196,r:1},
+  {n:"schemarift-typing-compat",d:"bug_fixing",l:"python",s:"pass",c:3.269897,dur:493.865,r:0},
+  {n:"metricsink-url-parsing-compat",d:"bug_fixing",l:"javascript",s:"pass",c:2.198348,dur:508.788,r:1},
+  {n:"vexforge-module-resolution-failure",d:"dependency_management",l:"javascript",s:"pass",c:2.563359,dur:376.573,r:1},
+  {n:"ironforge-batch-metrics-crash",d:"bug_fixing",l:"python",s:"pass",c:1.880558,dur:393.623,r:1},
+  {n:"ionflux-profiler-attribution-drift",d:"performance",l:"java",s:"pass",c:1.809581,dur:425.36,r:1},
+  {n:"forgelink-ci-workflow-breakage",d:"configuration",l:"java",s:"pass",c:1.562369,dur:399.178,r:1},
+  {n:"nimbusflow-telemetry-config-bug",d:"configuration",l:"java",s:"pass",c:1.576634,dur:402.931,r:1},
+  {n:"signalink-telemetry-redaction-leak",d:"security",l:"cpp",s:"pass",c:1.653906,dur:314.582,r:0},
+  {n:"confmesh-parse-overflow-traversal",d:"security",l:"cpp",s:"pass",c:1.433922,dur:1022.425,r:0},
+  {n:"pulsesync-metrics-integration-chain",d:"testing",l:"cpp",s:"pass",c:2.354995,dur:811.675,r:1},
+  {n:"quadgrid-header-linkage-errors",d:"dependency_management",l:"cpp",s:"pass",c:2.126481,dur:424.35,r:0},
+  {n:"meridian-route-navigation-crash",d:"bug_fixing",l:"python",s:"pass",c:2.197029,dur:400.859,r:0},
+  {n:"irongate-scheduler-grouping-regression",d:"bug_fixing",l:"java",s:"pass",c:2.601027,dur:462.143,r:0},
+  {n:"streamweave-relay-integration-contracts",d:"testing",l:"javascript",s:"pass",c:1.677933,dur:290.008,r:0},
+  {n:"vaultrix-api-docs-drift",d:"documentation",l:"javascript",s:"pass",c:1.592723,dur:472.53,r:1},
+  {n:"buildspec-task-command-injection",d:"security",l:"java",s:"pass",c:2.284796,dur:647.55,r:1},
+  {n:"quickspec-test-harness-failures",d:"testing",l:"java",s:"pass",c:3.121014,dur:894.484,r:2},
+  {n:"ferris-tracker-dependency-drift",d:"dependency_management",l:"java",s:"pass",c:1.451129,dur:339.651,r:1},
+  {n:"frostline-scorer-sensitivity-extension",d:"feature_development",l:"cpp",s:"pass",c:2.152226,dur:470.889,r:1},
+  {n:"vaulthex-reconcile-performance",d:"performance",l:"java",s:"pass",c:2.230784,dur:473.221,r:1},
+  {n:"gridlock-sync-timeout-regression",d:"bug_fixing",l:"java",s:"pass",c:2.287359,dur:409.075,r:0},
+  {n:"pulsarc-reconciliation-docs-drift",d:"documentation",l:"javascript",s:"verify_fail",c:2.659962,dur:927.497,r:3},
+  {n:"crestline-fold-regression",d:"bug_fixing",l:"python",s:"pass",c:2.037291,dur:346.275,r:0},
+  {n:"signalproc-format-negotiation-compat",d:"bug_fixing",l:"python",s:"error",c:1.537287,dur:384.732,r:0},
+  {n:"streamforge-sdk-docs-mismatch",d:"documentation",l:"python",s:"pass",c:1.70444,dur:429.063,r:1},
+  {n:"fieldpulse-yield-variance-issue",d:"bug_fixing",l:"python",s:"pass",c:2.570894,dur:501.261,r:1},
+  {n:"comet-lockfile-transitive-conflict",d:"dependency_management",l:"cpp",s:"pass",c:2.014084,dur:541.484,r:2},
+  {n:"pathcore-cpp-compat-upgrade",d:"bug_fixing",l:"cpp",s:"pass",c:2.345004,dur:438.83,r:0},
+  {n:"crystort-batch-merge-crash",d:"bug_fixing",l:"python",s:"pass",c:2.152777,dur:436.436,r:1},
+  {n:"quartzbeam-rollback-migration-wiring",d:"feature_development",l:"javascript",s:"pass",c:1.699752,dur:299.196,r:0},
+  {n:"vortex-telemetry-scalability-collapse",d:"performance",l:"cpp",s:"pass",c:2.48842,dur:787.898,r:2},
+  {n:"pulsewave-handler-code-quality",d:"code_quality",l:"java",s:"pass",c:2.942348,dur:638.524,r:1},
+  {n:"gridstone-maven-diamond-conflict",d:"dependency_management",l:"java",s:"pass",c:2.668183,dur:860.395,r:2},
+  {n:"signalweave-silence-detector",d:"feature_development",l:"javascript",s:"pass",c:2.20482,dur:377.265,r:0},
+  {n:"vaultbridge-exception-chain-leak",d:"security",l:"java",s:"pass",c:3.082464,dur:609.255,r:2},
+  {n:"nimbuslink-ssrf-validator-bypass",d:"security",l:"java",s:"pass",c:1.821839,dur:470.373,r:1},
+  {n:"termflow-analyzer-log-frequency",d:"performance",l:"javascript",s:"pass",c:1.766457,dur:376.383,r:0},
+  {n:"quadrantdb-deployment-drift",d:"configuration",l:"cpp",s:"pass",c:2.611291,dur:763.868,r:2},
+  {n:"vexflow-documentation-drift",d:"documentation",l:"python",s:"pass",c:1.451748,dur:244.557,r:0},
+  {n:"starloom-route-optimizer-slowdown",d:"performance",l:"python",s:"pass",c:2.794918,dur:621.604,r:1},
+  {n:"policyzen-eval-coverage-gaps",d:"testing",l:"python",s:"verify_fail",c:2.469049,dur:784.656,r:2},
+  {n:"condense-telemetry-dead-code",d:"code_quality",l:"python",s:"pass",c:1.648307,dur:382.085,r:1},
+  {n:"pulsar-profiler-scope-misattribution",d:"performance",l:"cpp",s:"verify_fail",c:2.436148,dur:864.768,r:2},
+  {n:"framecast-parser-crash-triage",d:"security",l:"cpp",s:"verify_fail",c:1.978582,dur:690.182,r:2},
+  {n:"vexflow-pipeline-jdk-builds",d:"configuration",l:"java",s:"pass",c:2.25501,dur:423.696,r:0},
+  {n:"routeweaver-deserialization-chain",d:"security",l:"python",s:"pass",c:1.703385,dur:287.116,r:0},
+  {n:"glowspan-nested-timing-attribution",d:"performance",l:"javascript",s:"pass",c:1.464626,dur:387.619,r:1},
+  {n:"stagecraft-pipeline-test-gaps",d:"testing",l:"python",s:"verify_fail",c:3.172056,dur:758.668,r:2},
+  {n:"prismforge-notification-payload-leak",d:"security",l:"python",s:"pass",c:1.663275,dur:281.936,r:0},
+  {n:"calcstream-expr-test-gaps",d:"testing",l:"javascript",s:"pass",c:1.902279,dur:321.772,r:0},
+  {n:"signalfx-coverage-gaps",d:"testing",l:"cpp",s:"pass",c:2.274548,dur:476.792,r:1},
+  {n:"vaultedge-authz-cache-bypass",d:"security",l:"cpp",s:"pass",c:2.260732,dur:660.054,r:2},
+  {n:"memwatch-allocation-tracker-drift",d:"performance",l:"python",s:"pass",c:1.640619,dur:292.675,r:0},
+  {n:"signalwire-multiplex-channel-routing",d:"feature_development",l:"javascript",s:"pass",c:1.632397,dur:489.522,r:2},
+  {n:"fluxcore-refactor-compile-failure",d:"dependency_management",l:"cpp",s:"pass",c:2.685352,dur:657.318,r:2},
+  {n:"streammux-channel-race-uaf",d:"security",l:"cpp",s:"pass",c:1.822322,dur:444.58,r:1},
+  {n:"balancealloc-distribution-skew",d:"bug_fixing",l:"cpp",s:"pass",c:2.468838,dur:552.276,r:2},
+  {n:"vaultline-workflow-action-migration",d:"configuration",l:"javascript",s:"pass",c:1.687241,dur:454.302,r:1},
+  {n:"crestline-harness-bootstrap-failures",d:"testing",l:"java",s:"pass",c:2.456309,dur:597.478,r:1},
+  {n:"stratolock-constraint-resolution-failure",d:"dependency_management",l:"python",s:"pass",c:1.860068,dur:435.461,r:1},
+  {n:"gridpilot-scheduler-crash",d:"dependency_management",l:"javascript",s:"error",c:3.149245,dur:346.239,r:0},
+  {n:"vectoris-coord-test-drift",d:"testing",l:"java",s:"pass",c:1.957473,dur:552.193,r:0},
+  {n:"prismcodec-dictionary-extension",d:"feature_development",l:"cpp",s:"pass",c:2.467422,dur:677.687,r:2},
+  {n:"batchcraft-processor-readability",d:"code_quality",l:"javascript",s:"pass",c:2.144188,dur:675.711,r:2},
+  {n:"nexforge-security-version-update",d:"dependency_management",l:"cpp",s:"pass",c:2.0426,dur:544.837,r:1},
+  {n:"flowspec-branch-integration-gaps",d:"feature_development",l:"javascript",s:"pass",c:1.822716,dur:305.667,r:0},
+  {n:"vaultstream-config-precedence-drift",d:"configuration",l:"javascript",s:"pass",c:1.696329,dur:301.335,r:0},
+  {n:"wavespec-spectral-band-analysis",d:"bug_fixing",l:"cpp",s:"pass",c:1.917944,dur:408.068,r:1},
+  {n:"eventfold-transform-pipeline-wiring",d:"feature_development",l:"javascript",s:"pass",c:1.726379,dur:399.906,r:1},
+  {n:"pulsestream-nested-redaction-bypass",d:"security",l:"cpp",s:"pass",c:2.068934,dur:497.33,r:1},
+  {n:"orbtrack-trajectory-dead-code",d:"code_quality",l:"cpp",s:"pass",c:2.460817,dur:711.973,r:2},
+  {n:"axiomlog-redaction-cache-leak",d:"security",l:"cpp",s:"verify_fail",c:2.894838,dur:1176.432,r:2},
+  {n:"thermosync-multi-tu-linkage-errors",d:"dependency_management",l:"cpp",s:"pass",c:3.386776,dur:398.993,r:0},
+  {n:"gateforge-policy-resolution-bypass",d:"security",l:"python",s:"pass",c:1.72062,dur:307.225,r:0},
+  {n:"streamforge-deployment-stale-references",d:"configuration",l:"python",s:"pass",c:2.515606,dur:530.079,r:1},
+  {n:"vaulthaven-credential-export-leak",d:"security",l:"java",s:"pass",c:2.013235,dur:423.11,r:1},
+  {n:"catalystvom-native-binding-wiring",d:"feature_development",l:"cpp",s:"pass",c:2.040459,dur:388.196,r:0},
+  {n:"signalforge-dead-code-removal",d:"code_quality",l:"java",s:"pass",c:1.66887,dur:313.876,r:0},
+  {n:"trellisforge-report-builder-refactor",d:"code_quality",l:"python",s:"pass",c:1.920083,dur:489.053,r:1},
+  {n:"sensorforge-integration-harness-gaps",d:"testing",l:"java",s:"pass",c:2.194794,dur:363.775,r:0},
+  {n:"flowgraph-test-suite-assertions",d:"testing",l:"python",s:"pass",c:1.453946,dur:308.059,r:1},
+  {n:"packdec-stream-throughput-drain",d:"performance",l:"cpp",s:"pass",c:2.09742,dur:366.196,r:0},
+  {n:"ciphertrail-docstring-algorithm-drift",d:"documentation",l:"java",s:"verify_fail",c:2.283901,dur:910.803,r:2},
+  {n:"nexqueue-batch-callback-extension",d:"feature_development",l:"javascript",s:"pass",c:1.799045,dur:369.644,r:1},
+  {n:"metricstream-scalability-bypass",d:"performance",l:"python",s:"pass",c:1.98226,dur:563.121,r:2},
+  {n:"bufpool-tagged-allocation-feature",d:"feature_development",l:"cpp",s:"pass",c:2.678576,dur:585.073,r:1},
+  {n:"stellarforge-telemetry-style-violations",d:"code_quality",l:"java",s:"pass",c:1.720158,dur:294.134,r:0},
+  {n:"orbiterconf-layered-envvar-fault",d:"configuration",l:"python",s:"pass",c:2.075355,dur:350.947,r:0},
+  {n:"quillstream-jsdoc-signature-drift",d:"documentation",l:"javascript",s:"verify_fail",c:2.366155,dur:776.192,r:2},
+  {n:"pulsescan-telemetry-filter-slowdown",d:"performance",l:"java",s:"error",c:1.379111,dur:640.409,r:1},
+  {n:"gridlock-harness-annotation-bootstrap",d:"testing",l:"java",s:"pass",c:2.164734,dur:402.177,r:0},
+  {n:"fluxgate-javadoc-semantics-drift",d:"documentation",l:"java",s:"pass",c:1.592715,dur:290.368,r:0},
+  {n:"glintforge-ci-workflow-misconfiguration",d:"configuration",l:"javascript",s:"verify_fail",c:1.834095,dur:682.55,r:3},
+  {n:"crestci-workflow-pipeline-blockage",d:"configuration",l:"python",s:"pass",c:2.03478,dur:342.836,r:0},
+  {n:"streamfold-window-summary",d:"bug_fixing",l:"python",s:"pass",c:2.023999,dur:411.633,r:1},
+  {n:"schemaforge-validation-slowdown",d:"performance",l:"javascript",s:"pass",c:2.03435,dur:503.179,r:1},
+  {n:"ferrokv-boundary-input-corruption",d:"bug_fixing",l:"cpp",s:"pass",c:2.335955,dur:490.01,r:1},
+  {n:"pulsegate-compose-path-misalignment",d:"configuration",l:"python",s:"pass",c:1.57464,dur:261.32,r:0},
+  {n:"pulseweave-transform-cache-wiring",d:"feature_development",l:"cpp",s:"pass",c:3.847838,dur:524.944,r:0},
+  {n:"jobchain-result-caching-wiring",d:"feature_development",l:"javascript",s:"pass",c:2.487219,dur:444.548,r:0},
+  {n:"fluxrelay-codebase-cruft-cleanup",d:"code_quality",l:"java",s:"verify_fail",c:1.955565,dur:644.33,r:2},
+  {n:"verigate-plc-command-security",d:"security",l:"cpp",s:"pass",c:1.716579,dur:306.143,r:0},
+  {n:"glintmark-precision-directive-extension",d:"feature_development",l:"javascript",s:"pass",c:1.412765,dur:389.07,r:1},
+  {n:"gridpulse-mathcore-version-sync",d:"dependency_management",l:"cpp",s:"pass",c:2.059037,dur:480.71,r:1},
+  {n:"aerokey-token-authz-bypass",d:"security",l:"cpp",s:"pass",c:1.931118,dur:314.856,r:0},
+  {n:"pulsegrid-cruft-removal",d:"code_quality",l:"cpp",s:"pass",c:2.047283,dur:467.583,r:1},
+  {n:"wavelink-message-ack-wiring",d:"feature_development",l:"java",s:"pass",c:1.598108,dur:351.639,r:1},
+  {n:"wavechart-arrow-shorthand-lint",d:"code_quality",l:"javascript",s:"error",c:1.596942,dur:364.823,r:0},
+  {n:"vortexium-axlint-style-violations",d:"code_quality",l:"cpp",s:"pass",c:2.172968,dur:500.206,r:1},
+  {n:"cipherlink-service-token-bypass",d:"security",l:"java",s:"pass",c:2.437042,dur:752.63,r:2},
+  {n:"dataweave-cli-docs-drift",d:"documentation",l:"java",s:"pass",c:2.205675,dur:402.192,r:0},
+  {n:"batchforge-transaction-summary-crash",d:"bug_fixing",l:"java",s:"pass",c:1.342881,dur:245.075,r:0},
+  {n:"routeopt-naming-convention-drift",d:"code_quality",l:"java",s:"pass",c:2.377136,dur:517.855,r:1},
+];
+
+const doms=["bug_fixing","code_quality","configuration","dependency_management","documentation","feature_development","performance","security","testing"];
+const domLabels=doms.map(d=>d.replace(/_/g,' '));
+const langs=["java","python","javascript","cpp"];
+const sc={pass:'#1D9E75',verify_fail:'#BA7517',error:'#E24B4A'};
+
+function cnt(arr,key,val){return arr.filter(x=>x[key]===val).length}
+function avg(arr,key){return arr.reduce((s,x)=>s+x[key],0)/arr.length}
+function byD(d,s){return D.filter(x=>x.d===d&&x.s===s).length}
+function byL(l,s){return D.filter(x=>x.l===l&&x.s===s).length}
+function avgByD(d,k){const a=D.filter(x=>x.d===d);return avg(a,k)}
+function avgByL(l,k){const a=D.filter(x=>x.l===l);return avg(a,k)}
+
+new Chart(document.getElementById('c1'),{
+  type:'bar',
+  data:{labels:domLabels,datasets:[
+    {label:'Pass',data:doms.map(d=>byD(d,'pass')),backgroundColor:'#1D9E75'},
+    {label:'Verify fail',data:doms.map(d=>byD(d,'verify_fail')),backgroundColor:'#BA7517'},
+    {label:'Error',data:doms.map(d=>byD(d,'error')),backgroundColor:'#E24B4A'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{font:{size:11},color:'#888'}},y:{stacked:true,ticks:{font:{size:11},color:'#888'}}},plugins:{legend:{display:false}}}
+});
+
+new Chart(document.getElementById('c2'),{
+  type:'bar',
+  data:{labels:langs,datasets:[
+    {label:'Pass',data:langs.map(l=>byL(l,'pass')),backgroundColor:'#1D9E75'},
+    {label:'Verify fail',data:langs.map(l=>byL(l,'verify_fail')),backgroundColor:'#BA7517'},
+    {label:'Error',data:langs.map(l=>byL(l,'error')),backgroundColor:'#E24B4A'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{font:{size:12},color:'#888'}},y:{stacked:true,ticks:{font:{size:11},color:'#888'}}},plugins:{legend:{display:false}}}
+});
+
+const rCnts=[0,1,2,3].map(n=>D.filter(x=>x.r===n).length);
+new Chart(document.getElementById('c3'),{
+  type:'doughnut',
+  data:{labels:['0 repairs','1 repair','2 repairs','3 repairs'],datasets:[{data:rCnts,backgroundColor:['#1D9E75','#378ADD','#BA7517','#E24B4A'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},color:'#888',boxWidth:10,padding:8}}}}
+});
+
+new Chart(document.getElementById('c4'),{
+  type:'bar',
+  data:{labels:domLabels,datasets:[{label:'Avg cost',data:doms.map(d=>parseFloat(avgByD(d,'c').toFixed(3))),backgroundColor:'#7F77DD',borderRadius:3}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{font:{size:10},color:'#888',callback:v=>'$'+v.toFixed(2)}},y:{ticks:{font:{size:10},color:'#888'}}},plugins:{legend:{display:false}}}
+});
+
+new Chart(document.getElementById('c5'),{
+  type:'bar',
+  data:{labels:domLabels,datasets:[{label:'Avg duration',data:doms.map(d=>Math.round(avgByD(d,'dur'))),backgroundColor:'#378ADD',borderRadius:3}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{font:{size:10},color:'#888',callback:v=>v+'s'}},y:{ticks:{font:{size:10},color:'#888'}}},plugins:{legend:{display:false}}}
+});
+
+new Chart(document.getElementById('c6'),{
+  type:'bar',
+  data:{labels:langs,datasets:[{label:'Avg cost',data:langs.map(l=>parseFloat(avgByL(l,'c').toFixed(3))),backgroundColor:'#D85A30',borderRadius:3}]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{font:{size:12},color:'#888'}},y:{ticks:{font:{size:11},color:'#888',callback:v=>'$'+v.toFixed(2)}}},plugins:{legend:{display:false}}}
+});
+
+new Chart(document.getElementById('c7'),{
+  type:'bar',
+  data:{labels:langs,datasets:[{label:'Avg dur',data:langs.map(l=>Math.round(avgByL(l,'dur'))),backgroundColor:'#0F6E56',borderRadius:3}]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{font:{size:12},color:'#888'}},y:{ticks:{font:{size:11},color:'#888',callback:v=>v+'s'}}},plugins:{legend:{display:false}}}
+});
+
+let cum=0;
+new Chart(document.getElementById('c8'),{
+  type:'line',
+  data:{labels:D.map((_,i)=>'#'+(i+1)),datasets:[{label:'Cumulative cost',data:D.map(x=>{cum+=x.c;return parseFloat(cum.toFixed(2));}),borderColor:'#7F77DD',backgroundColor:'rgba(127,119,221,0.07)',fill:true,pointRadius:0,tension:0.3}]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{maxTicksLimit:12,font:{size:10},color:'#888'}},y:{ticks:{font:{size:11},color:'#888',callback:v=>'$'+v.toFixed(0)}}},plugins:{legend:{display:false}}}
+});
+
+const fails=D.filter(x=>x.s!=='pass').sort((a,b)=>b.c-a.c);
+const ftb=document.getElementById('ftbody');
+fails.forEach(t=>{
+  const tr=document.createElement('tr');
+  tr.style.borderBottom='.5px solid var(--color-border-tertiary)';
+  tr.innerHTML=`<td style="padding:6px 4px 6px 0;color:var(--color-text-primary);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.n}">${t.n}</td><td style="padding:6px 4px;color:var(--color-text-secondary)">${t.d.replace(/_/g,' ')}</td><td style="padding:6px 4px;color:var(--color-text-secondary)">${t.l}</td><td style="padding:6px 0;text-align:right;font-weight:500">$${t.c.toFixed(2)}</td><td style="padding:6px 0;text-align:right;color:var(--color-text-secondary)">${Math.round(t.dur)}s</td><td style="padding:6px 0;text-align:right">${t.r}</td><td style="padding:6px 0;text-align:right;color:${sc[t.s]};font-weight:500">${t.s.replace('_',' ')}</td>`;
+  ftb.appendChild(tr);
+});
+
+const top5=[...D].sort((a,b)=>b.c-a.c).slice(0,5);
+const ttb=document.getElementById('ttbody');
+top5.forEach(t=>{
+  const tr=document.createElement('tr');
+  tr.style.borderBottom='.5px solid var(--color-border-tertiary)';
+  tr.innerHTML=`<td style="padding:6px 4px 6px 0;color:var(--color-text-primary);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.n}">${t.n}</td><td style="padding:6px 4px;color:var(--color-text-secondary)">${t.d.replace(/_/g,' ')}</td><td style="padding:6px 4px;color:var(--color-text-secondary)">${t.l}</td><td style="padding:6px 0;text-align:right;font-weight:500">$${t.c.toFixed(2)}</td><td style="padding:6px 0;text-align:right;color:${sc[t.s]}">${t.s.replace('_',' ')}</td>`;
+  ttb.appendChild(tr);
+});
+</script>
